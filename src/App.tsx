@@ -1,7 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Style from '@mui/icons-material/Style';
 
 //React-Router-Dom
 import {
@@ -13,9 +12,7 @@ import {
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import { Container } from '@mui/material';
 
-//Footer
-import BottomNavigation from '@mui/material/BottomNavigation';
-
+//Pages
 import Header from './header';
 import Home from './home';
 import Companion from './companion';

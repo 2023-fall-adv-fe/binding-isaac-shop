@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import { Container } from '@mui/material';
 import { Style } from '@mui/icons-material';
 
-function Offer() {
+const Offer = () => {
     return (
         <>
             <Grid xs={12}>
