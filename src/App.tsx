@@ -13,39 +13,68 @@ import {
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import { Container } from '@mui/material';
 
-//Header
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-
-//Body
-import Card from '@mui/material/Card';
-import Button from '@mui/material/Button';
-import CardContent from '@mui/material/CardContent';
-import SettingsIcon from '@mui/icons-material/Settings';
-
 //Footer
 import BottomNavigation from '@mui/material/BottomNavigation';
+
+import Header from './header';
+import Home from './home';
+import Companion from './companion';
+import Config from './config';
+import Offer from './offer';
+import Footer from './footer';
+
 
 const router = createHashRouter([
   {
     path: "/",
-    element: <div>Main</div>,
+    element:  <>
+                <Container>
+                  <Grid container spacing={8} columns={12}>
+                    <Header />
+                    <Home />
+                    <Footer />
+                  </Grid>
+                </Container>
+              </>,
   },
 
   {
-    path: "/play",
-    element: <div>Game Companion</div>,
+    path: "/companion",
+    element:  <>
+                <Container>
+                  <Grid container spacing={8} columns={12}>
+                    <Header />
+                    <Companion />
+                    <Footer />
+                  </Grid>
+                </Container>
+              </>,
   },
 
   {
     path: "/config",
-    element: <div>Configuration</div>,
+    element:  <>
+                <Container>
+                  <Grid container spacing={8} columns={12}>
+                    <Header />
+                    <Config />
+                    <Footer />
+                  </Grid>
+                </Container>
+              </>,
   },
 
   {
     path: "/offer",
-    element: <div>Offer</div>,
+    element:  <>
+                <Container>
+                  <Grid container spacing={8} columns={12}>
+                    <Header />
+                    <Offer />
+                    <Footer />
+                  </Grid>
+                </Container>
+              </>,
   },
 ]);
 
@@ -55,6 +84,6 @@ const App = () => {
       <RouterProvider router={router} />
     </div>
   );
-}
+};
 
 export default App;

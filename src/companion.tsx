@@ -8,11 +8,11 @@ import Typography from '@mui/material/Typography';
 import { Container } from '@mui/material';
 import { Style } from '@mui/icons-material';
 
-function Offer() {
+function Companion() {
     return (
         <>
             <Grid xs={12}>
-                <div>offer</div>
+                <div>companion</div>
                 <Grid container columns={{xs: 12}}>
                 <Grid xs={12}>
                     <Card sx={{ minWidth: 225, marginTop: "0rem", marginBottom: "0rem" }}> {/* Stock Market */}
@@ -55,4 +55,4 @@ function Offer() {
     );
 }
 
-export default Offer;
+export default Companion;
