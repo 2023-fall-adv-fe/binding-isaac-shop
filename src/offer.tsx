@@ -8,6 +8,10 @@ import Typography from '@mui/material/Typography';
 import { Container } from '@mui/material';
 import { Style } from '@mui/icons-material';
 
+//Icons
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 const Offer = () => {
     return (
         <>
