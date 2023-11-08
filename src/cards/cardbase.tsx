@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 //Card Icons
 import FavoriteIcon from '@mui/icons-material/Favorite';          // Heart
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';    // Money
+import { log } from 'console';
 
 /*
 bgcolor: 'lightyellow'   =    LEGENDARY
@@ -41,30 +42,36 @@ class TradingCard {
 //   console.log(tradingCards[1].rarity); // "Rare"
 //   console.log(tradingCards[2].description); // "An extremely rare and powerful trading card."
 
-
+const valueToString = (name: string) => {
+    console.log(name.toString);
+    return(name);
+};
 
 //---------------------CARD-----------------------
 const CardBase = () => {
 return (
-    <Grid xs={1}>
+    <Grid xs={4}>
     <Grid container sx={{
         bgcolor: 'lightyellow',
         minHeight: '100%',
         maxHeight: '100%',
+        border: 'purple',
         display: 'flex',
         flexDirection: 'column'
-    }}>
-        <Grid>
-            <Typography variant='h5' sx={{marginTop: '1rem', marginInline: '0.75rem'}}>
+}}>
+        <Grid sx={{
+            bgcolor: 'white',
+        }}>
+            <Typography variant='h5' sx={{}}>
             {tradingCards[1].name}
             </Typography>
-            <Typography variant='body1' sx={{color: 'grey', marginTop: '0.5rem', marginBottom: '1.25rem'}}>
+            <Typography variant='body1' sx={{color: 'grey'}}>
             {tradingCards[1].rarity}
             </Typography>
 
         </Grid>
         <Grid >
-            <Typography variant='body1' sx={{marginBottom: '1rem', marginInline: '0.75rem'}}>
+            <Typography variant='body1' sx={{}}>
             {tradingCards[1].description}
             </Typography>
         </Grid>

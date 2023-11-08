@@ -38,72 +38,10 @@ const Companion = () => {
                     <Grid container columns={{ xs: 4, md: 8 }}>
 
                     <Grid xs={4} md={8} style={{ marginTop: "0.2rem", marginBottom: "3rem" }}>
-                        <Grid container spacing={1} columns={{xs:3, md:1}}>
+                        <Grid container spacing={3} columns={{xs:12}}>
 
-
-                            {/* ----------------------------------CARD ONE---------------------------------- */}
-                            <Grid xs={1}>
-                                <Grid container sx={{
-                                    bgcolor: 'white',
-                                    minHeight: '100%',
-                                    maxHeight: '100%',
-                                    display: 'flex',
-                                    flexDirection: 'column'
-                                }}>
-                                    <Grid>
-                                        <Typography variant='h5' sx={{marginTop: '1rem', marginInline: '0.75rem'}}>
-                                            Dads Lost Coin
-                                        </Typography>
-                                        <Typography variant='body1' sx={{color: 'grey', marginTop: '0.5rem', marginBottom: '1.25rem'}}>
-                                            Common
-                                        </Typography>
-
-                                    </Grid>
-                                    <Grid >
-                                        <Typography variant='body1' sx={{marginBottom: '1rem', marginInline: '0.75rem'}}>
-                                            When anyone rolls a 1, you may reroll it.
-                                        </Typography>
-                                    </Grid>
-
-                                    <Grid sx={{marginTop: 'auto', marginBottom: '1rem'}}>
-                                        <Button size="small" color='error' variant='contained'>Remove</Button>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-
-
-                            {/* ----------------------------------CARD TWO---------------------------------- */}
-                            <Grid xs={1}>
-                                <Grid container sx={{
-                                    bgcolor: 'lightblue',
-                                    minHeight: '100%',
-                                    maxHeight: '100%',
-                                    display: 'flex',
-                                    flexDirection: 'column'
-                                }}>
-                                    <Grid>
-                                        <Typography variant='h5' sx={{marginTop: '1rem', marginInline: '0.75rem'}}>
-                                            Dinner
-                                        </Typography>
-                                        <Typography variant='body1' sx={{color: 'grey', marginTop: '0.5rem', marginBottom: '1.25rem'}}>
-                                            Rare
-                                        </Typography>
-
-                                    </Grid>
-                                    <Grid >
-                                        <Typography variant='body1' sx={{marginBottom: '1rem', marginInline: '0.75rem'}}>
-                                            +1 <FavoriteIcon fontSize='small'/>
-                                        </Typography>
-                                    </Grid>
-
-                                    <Grid sx={{marginTop: 'auto', marginBottom: '1rem'}}>
-                                        <Button size="small" color='error' variant='contained'>Remove</Button>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-
-          
-                            {/* ----------------------------------CARD THREE---------------------------------- */}
+                            <CardBase />
+                            <CardBase />
                             <CardBase />
 
                         </Grid>
