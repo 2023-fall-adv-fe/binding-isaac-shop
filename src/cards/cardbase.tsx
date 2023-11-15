@@ -50,7 +50,6 @@ const valueToString = (name: string) => {
 //---------------------CARD-----------------------
 const CardBase = () => {
 return (
-    <Grid xs={4}>
     <Grid container sx={{
         bgcolor: 'lightyellow',
         minHeight: '100%',
@@ -79,7 +78,6 @@ return (
         <Grid sx={{marginTop: 'auto', marginBottom: '1rem'}}>
             <Button size="small" color='error' variant='contained'>Remove</Button>
         </Grid>
-    </Grid>
     </Grid>
 );
 };

@@ -14,7 +14,7 @@ import { Container } from '@mui/material';
 
 //Pages
 import Header from './header';
-import Home from './home';
+import Home from './Home';
 import Companion from './companion';
 import Config from './config';
 import Offer from './offer';
@@ -22,21 +22,21 @@ import Footer from './footer';
 
 
 const router = createHashRouter([
-  {
-    path: "/",
-    element:  <>
-                <Container>
-                  <Grid container spacing={8} columns={12}>
-                    <Header />
-                    <Home />
-                    <Footer />
-                  </Grid>
-                </Container>
-              </>,
-  },
+  //{
+  //   path: "/",
+  //   element:  <>
+  //               <Container>
+  //                 <Grid container spacing={8} columns={12}>
+  //                   <Header />
+  //                   <Home />
+  //                   <Footer />
+  //                 </Grid>
+  //               </Container>
+  //             </>,
+  // },
 
   {
-    path: "/companion",
+    path: "/",
     element:  <>
                 <Container>
                   <Grid container spacing={8} columns={12}>
