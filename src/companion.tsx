@@ -40,7 +40,7 @@ const Companion = () => {
                     <Grid xs={4} md={8} style={{ marginTop: "0.2rem", marginBottom: "3rem" }}>
                         <Grid container spacing={3} columns={{xs:12}}>
 
-                            <Grid xs={4}>
+                        <Grid xs={4}>
                                 <CardBase />
                             </Grid>
                             <Grid xs={4}>
@@ -51,7 +51,38 @@ const Companion = () => {
                             </Grid>
 
 
-                            <Grid xs={4}>
+                            {/* <Grid xs={4}>
+                            <Grid container sx={{
+                                bgcolor: 'lightyellow',
+                                minHeight: '100%',
+                                maxHeight: '100%',
+                                border: 'purple',
+                                display: 'flex',
+                                flexDirection: 'column'
+                            }}>
+                                <Grid sx={{
+                                    bgcolor: 'white',
+                                }}>
+                                    <Typography variant='h5' sx={{}}>
+                                    {'tradingCards[1].name'}
+                                    </Typography>
+                                    <Typography variant='body1' sx={{color: 'grey'}}>
+                                    {'tradingCards[1].rarity'}
+                                    </Typography>
+
+                                </Grid>
+                                <Grid >
+                                    <Typography variant='body1' sx={{}}>
+                                    {'tradingCards[1].description'}
+                                    </Typography>
+                                </Grid>
+
+                                <Grid sx={{marginTop: 'auto', marginBottom: '1rem'}}>
+                                    <Button size="small" color='error' variant='contained'>Remove</Button>
+                                </Grid>
+                            </Grid>
+                            </Grid>
+                             <Grid xs={4}>
                                 <Grid container sx={{
                                     bgcolor: 'lightyellow',
                                     minHeight: '100%',
@@ -112,38 +143,7 @@ const Companion = () => {
                                         <Button size="small" color='error' variant='contained'>Remove</Button>
                                     </Grid>
                                 </Grid>
-                            </Grid>                            
-                            <Grid xs={4}>
-                                <Grid container sx={{
-                                    bgcolor: 'lightyellow',
-                                    minHeight: '100%',
-                                    maxHeight: '100%',
-                                    border: 'purple',
-                                    display: 'flex',
-                                    flexDirection: 'column'
-                            }}>
-                                    <Grid sx={{
-                                        bgcolor: 'white',
-                                    }}>
-                                        <Typography variant='h5' sx={{}}>
-                                        {'tradingCards[1].name'}
-                                        </Typography>
-                                        <Typography variant='body1' sx={{color: 'grey'}}>
-                                        {'tradingCards[1].rarity'}
-                                        </Typography>
-
-                                    </Grid>
-                                    <Grid >
-                                        <Typography variant='body1' sx={{}}>
-                                        {'tradingCards[1].description'}
-                                        </Typography>
-                                    </Grid>
-
-                                    <Grid sx={{marginTop: 'auto', marginBottom: '1rem'}}>
-                                        <Button size="small" color='error' variant='contained'>Remove</Button>
-                                    </Grid>
-                                </Grid>
-                            </Grid>                            
+                            </Grid>                             */}
 
                         </Grid>
                     </Grid>

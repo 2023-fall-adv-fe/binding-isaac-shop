@@ -14,7 +14,6 @@ import { Container } from '@mui/material';
 
 //Pages
 import Header from './header';
-import Home from './Home';
 import Companion from './companion';
 import Config from './config';
 import Offer from './offer';
