@@ -18,24 +18,25 @@ import Companion from './companion';
 import Config from './config';
 import Offer from './offer';
 import Footer from './footer';
+import Home from './home';
 
 
 const router = createHashRouter([
-  //{
-  //   path: "/",
-  //   element:  <>
-  //               <Container>
-  //                 <Grid container spacing={8} columns={12}>
-  //                   <Header />
-  //                   <Home />
-  //                   <Footer />
-  //                 </Grid>
-  //               </Container>
-  //             </>,
-  // },
-
   {
     path: "/",
+    element:  <>
+                <Container>
+                  <Grid container spacing={8} columns={12}>
+                    <Header />
+                    <Home />
+                    <Footer />
+                  </Grid>
+                </Container>
+              </>,
+  },
+
+  {
+    path: "/companion",
     element:  <>
                 <Container>
                   <Grid container spacing={8} columns={12}>
