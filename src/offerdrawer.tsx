@@ -17,32 +17,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import StyleIcon from '@mui/icons-material/Style';
 import DiamondIcon from '@mui/icons-material/Diamond';
+import { tradingCards } from './cards/cardarr';
 
 // Data Needed---------------
 const drawerBleeding = 56;
-const itemName = "Guppy Items"; // Name for the offer item
-const itemType = "T"; // Letter for Item in offer (Treasure = T, Loot = L, Coin = C, Soul = S)
-const itemRarity = { color: "black", bgcolor: 'lightyellow' };
-const lootCount = 2;
-const soulCount = 1;
-
-// OBJECT STRUCTURE -----------
-const ListObject = (iT: string, iR: object, iN: string) => (
-    <Stack spacing={2} paddingY="10px" direction="row" alignItems="center" alignSelf="start">
-    <Stack>
-      <Avatar sx={iR}>{iT}</Avatar>
-    </Stack>
-    <Stack sx={{ minWidth: 0, flexGrow: 1 }}>
-      <Typography variant="h6" noWrap>{iN}</Typography>
-    </Stack>
-    <Stack sx={{ minWidth: 0 }}>
-      <Button variant="contained" color="error" startIcon={<DeleteIcon />}>
-        Delete
-      </Button>
-    </Stack>
-  </Stack>
-);
-// -----------
 
 const StyledBox = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'light' ? '#fff' : grey[800],
@@ -55,97 +33,229 @@ export default function SwipeableEdgeDrawer() {
       setOpen(newOpen);
     };
 
+//Get Shopkeeper info (Left) --------------
+const [leftCoinAmount, setLeftCoinAmount] = useState('');
+const [leftLootAmount, setLeftLootAmount] = useState('');
+const [leftTreasureName, setLeftTreasureName] = useState('');
+const [leftModifiedElements, setLeftModifiedElements] = useState<React.ReactNode[]>([]);
+//Get user information (Right)--------------
+const [rightCoinAmount, setRightCoinAmount] = useState('');
+const [rightLootAmount, setRightLootAmount] = useState('');
+const [rightTreasureName, setRightTreasureName] = useState('');
+const [rightModifiedElements, setRightModifiedElements] = useState<React.ReactNode[]>([]);
 
-    //Get user information in offer--------------
-    const [coinAmount, setCoinAmount] = useState('');
-    const [lootAmount, setLootAmount] = useState('');
-    const [treasureName, setTreasureName] = useState('');
-    const [modifiedElements, setModifiedElements] = useState<React.ReactNode[]>([]);
+// LEFT FUNCTIONS!
+const handleLeftDeleteButtonClick = (element: React.ReactNode) => {
+    const updatedElements = leftModifiedElements.filter((el) => el !== element);
+    setLeftModifiedElements(updatedElements);
+};
+const handleLeftCoinButtonClick = () => {
+    const modifiedElement = (
+        <Stack
+        key={leftModifiedElements.length}
+        margin={1}
+        spacing={2}
+        paddingY="10px"
+        direction="row"
+        alignItems="center"
+        alignSelf="start"
+        >
+        <Stack>
+            <Avatar sx={{ color: 'black' }}>C</Avatar>
+        </Stack>
+        <Stack sx={{ minWidth: 0, flexGrow: 1 }}>
+            <Typography variant="h6" noWrap>
+            {'Coin: ' + Number(leftCoinAmount)}
+            </Typography>
+        </Stack>
+        </Stack>
+    );
 
-    // Delete Button
-    const handleDeleteButtonClick = (element: React.ReactNode) => {
-        const updatedElements = modifiedElements.filter((el) => el !== element);
-        setModifiedElements(updatedElements);
+    setLeftModifiedElements([...leftModifiedElements, modifiedElement]);
+    setLeftCoinAmount('');
+};
+const handleLeftLootButtonClick = () => {
+    const modifiedElement = (
+        <Stack
+        key={leftModifiedElements.length}
+        margin={1}
+        spacing={2}
+        paddingY="10px"
+        direction="row"
+        alignItems="center"
+        alignSelf="start"
+        >
+        <Stack>
+            <Avatar sx={{ color: "black", bgcolor: 'lightblue' }}>L</Avatar>
+        </Stack>
+        <Stack sx={{ minWidth: 0, flexGrow: 1 }}>
+            <Typography variant="h6" noWrap>{"Loot: " + Number(leftLootAmount)}</Typography>
+        </Stack>
+        </Stack>
+    );
+
+    setLeftModifiedElements([...leftModifiedElements, modifiedElement]);
+    setLeftLootAmount('');
+};
+const handleLeftTreasureButtonClick = () => {
+    const findCardRarityColor = () => {
+        console.log("user input: " + leftTreasureName);
+        let object = tradingCards.find(obj => obj.name === leftTreasureName);
+        console.log(object);
+        if (object == undefined) {
+            console.log('error missing card name');
+            return('pink');
+        } else {
+            const n = object.rarity;
+            if (n == "Common") {return("white")}
+            else if (n == "Rare") {return("lightblue")}
+            else if (n == "Legendary") {return("#FFFF99")}
+            else {return("black")}
+        }
     };
-
-    
-    const handleCoinButtonClick = () => {
-        const modifiedElement = (
-            <Stack
-            key={modifiedElements.length}
+    const modifiedElement = (
+        <Stack
+            key={leftModifiedElements.length}
             spacing={2}
             paddingY="10px"
+            margin={1}
             direction="row"
             alignItems="center"
             alignSelf="start"
-            >
+        >
             <Stack>
-                <Avatar sx={{ color: 'black' }}>C</Avatar>
+                <Avatar sx={{
+                    color: 'black',
+                    bgcolor: findCardRarityColor()
+                }}
+                >T</Avatar>
             </Stack>
             <Stack sx={{ minWidth: 0, flexGrow: 1 }}>
-                <Typography variant="h6" noWrap>
-                {'Coin: ' + Number(coinAmount)}
+                <Typography variant="body1">
+                    {leftTreasureName}
                 </Typography>
             </Stack>
-            </Stack>
-        );
+        </Stack>
+    );
+    setLeftModifiedElements([...leftModifiedElements, modifiedElement]);
+    setLeftTreasureName(''); // Clear input
+};
 
-        setModifiedElements([...modifiedElements, modifiedElement]);
-        setCoinAmount(''); // Clear input
-    };
-  
-    const handleLootButtonClick = () => {
-        const modifiedElement = (
-          <Stack
-            key={modifiedElements.length}
+// RIGHT FUNCTIONS!
+const handleRightDeleteButtonClick = (element: React.ReactNode) => {
+    const updatedElements = rightModifiedElements.filter((el) => el !== element);
+    setRightModifiedElements(updatedElements);
+};
+const handleRightCoinButtonClick = () => {
+    const modifiedElement = (
+        <Stack
+        key={rightModifiedElements.length}
+        margin={1}
+        spacing={2}
+        paddingY="10px"
+        direction="row"
+        alignItems="center"
+        alignSelf="start"
+        >
+        <Stack>
+            <Avatar sx={{ color: 'black' }}>C</Avatar>
+        </Stack>
+        <Stack sx={{ minWidth: 0, flexGrow: 1 }}>
+            <Typography variant="h6" noWrap>
+            {'Coin: ' + Number(rightCoinAmount)}
+            </Typography>
+        </Stack>
+        </Stack>
+    );
+
+    setRightModifiedElements([...rightModifiedElements, modifiedElement]);
+    setRightCoinAmount('');
+};
+const handleRightLootButtonClick = () => {
+    const modifiedElement = (
+        <Stack
+            key={rightModifiedElements.length}
             spacing={2}
+            margin={1}
             paddingY="10px"
             direction="row"
             alignItems="center"
             alignSelf="start"
-          >
+        >
             <Stack>
-              <Avatar sx={{ color: "black", bgcolor: 'lightblue' }}>L</Avatar>
+            <Avatar sx={{ color: "black", bgcolor: 'lightblue' }}>L</Avatar>
             </Stack>
             <Stack sx={{ minWidth: 0, flexGrow: 1 }}>
-              <Typography variant="h6" noWrap>{"Loot: " + Number(lootAmount)}</Typography>
+            <Typography variant="h6" noWrap>{"Loot: " + Number(rightLootAmount)}</Typography>
             </Stack>
-          </Stack>
+        </Stack>
         );
     
-        setModifiedElements([...modifiedElements, modifiedElement]);
-        setLootAmount(''); // Clear input
+        setRightModifiedElements([...rightModifiedElements, modifiedElement]);
+        setRightLootAmount('');
+};
+const handleRightTreasureButtonClick = () => {
+    const findCardRarityColor = () => {
+        console.log("user input: " + rightTreasureName);
+        let object = tradingCards.find(obj => obj.name === rightTreasureName);
+        console.log(object);
+        if (object == undefined) {
+            console.log('error missing card name');
+            return('pink');
+        } else {
+            const n = object.rarity;
+            if (n == "Common") {return("white")}
+            else if (n == "Rare") {return("lightblue")}
+            else if (n == "Legendary") {return("#FFFF99")}
+            else {return("black")}
+        }
     };
-  
-    const handleTreasureButtonClick = () => {
-      // Do something with treasureName
-      console.log('Treasure Name:', treasureName);
-    };
+    const modifiedElement = (
+        <Stack
+            key={rightModifiedElements.length}
+            spacing={2}
+            paddingY="10px"
+            margin={1}
+            direction="row"
+            alignItems="center"
+            alignSelf="start"
+        >
+            <Stack>
+                <Avatar sx={{
+                    color: 'black',
+                    bgcolor: findCardRarityColor()
+                }}
+                >T</Avatar>
+            </Stack>
+            <Stack sx={{ minWidth: 0, flexGrow: 1 }}>
+                <Typography variant="body1">
+                    {rightTreasureName}
+                </Typography>
+            </Stack>
+        </Stack>
+    );
+    setRightModifiedElements([...rightModifiedElements, modifiedElement]);
+    setRightTreasureName(''); // Clear input
+};
+
+
 
 
 return (
-    <>
-        <Global
-        styles={{
-            '.MuiDrawer-root > .MuiPaper-root': {
-            height: `calc(50% - ${drawerBleeding}px)`,
-            overflow: 'visible',
-            },
-        }}
-        />
-    
-        <Button
-        sx={{ bgcolor: 'gold', color: 'black' }}
-        style={{ paddingInline: '5rem' }}
-        variant='contained'
-        size='large'
-        startIcon={<Style />}
-        onClick={toggleDrawer(true)}
-        >
-        Make Offer
-        </Button>
-    
-        <SwipeableDrawer
+<>
+    <Global styles={{ '.MuiDrawer-root > .MuiPaper-root': { height: `calc(50% - ${drawerBleeding}px)`, overflow: 'visible', }}}/>
+    <Button
+    sx={{ bgcolor: 'gold', color: 'black' }}
+    style={{ paddingInline: '5rem' }}
+    variant='contained'
+    size='large'
+    startIcon={<Style />}
+    onClick={toggleDrawer(true)}
+    >
+    Make Offer
+    </Button>
+
+    <SwipeableDrawer
         anchor="bottom"
         open={open}
         onClose={toggleDrawer(false)}
@@ -155,106 +265,170 @@ return (
         ModalProps={{
             keepMounted: true,
         }}
-        >
-        <StyledBox sx={{ pt: 4, px: 2, pb: 2, height: '100%', overflow: 'auto', bgcolor: 'white' }}>
-            {/* _____________________ DRAWER CONTENT _____________________ */}
-            <Grid container>
-            <Grid container xs={12} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                {/* _____________________________________________ShopKeeper Offer________________________________ */}
-                <Grid item xs={12} sm={6}>
-                <Grid container bgcolor={'grey'}>
-                    {modifiedElements.map((element, index) => (
-                    <Stack key={index} bgcolor={'lightgrey'} borderRadius={1} margin={1.2}>
-                        {element}
-                        <Button
+    >
+    <StyledBox sx={{ pt: 4, px: 2, pb: 2, height: '100%', overflow: 'auto', bgcolor: 'white' }}>
+        <Grid container>
+        <Grid container xs={12} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+            {/* _____________________________________________Left Inventory________________________________ */}
+            <Grid item xs={12} sm={6}>
+            <Grid container bgcolor={'grey'}>
+                {leftModifiedElements.map((element, index) => (
+                <Stack key={index} bgcolor={'lightgrey'} borderRadius={1} margin={1.2}>
+                    {element}
+                    <Button
                         variant="contained"
                         color="error"
                         startIcon={<DeleteIcon />}
-                        onClick={() => handleDeleteButtonClick(element)}
+                        onClick={() => handleLeftDeleteButtonClick(element)}
                         sx={{ m: '10px' }}
-                        >
+                    >
                         Delete
-                        </Button>
-                    </Stack>
-                    ))}
-                </Grid>
-                </Grid>
-    
-                {/* _____________________________________________Player Offer________________________________ */}
-                <Grid item xs={12} sm={6}>
-                <Stack spacing={1} direction="column" justifyContent="center" alignItems="center" bgcolor={'grey'} borderRadius={2}>
-                    {/* ------------OBJ------------- */}
-                    {ListObject(itemType, itemRarity, itemName)}
+                    </Button>
                 </Stack>
-                </Grid>
+                ))}
             </Grid>
-    
-            <Grid container xs={12} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                <Grid item xs={12} sm={6}>
-                <AppBar position="static" color="primary">
-                    <Toolbar>
-                    <Stack spacing={0} direction="row" borderRadius={2}>
-                        {/* ----------COIN---------- */}
-                        <div>
-                        <TextField
-                            id="standard-number"
-                            label="Coins"
-                            value={coinAmount}
-                            type="number"
-                            onChange={(e) => setCoinAmount(e.target.value)}
-                            size="small"
-                            InputLabelProps={{
-                            shrink: true,
-                            }}
-                            variant="standard"
-                        />
-                        </div>
-                        <Button
+            </Grid>
+            {/* _____________________________________________Right Inventory________________________________ */}
+            <Grid item xs={12} sm={6}>
+            <Grid container bgcolor={'grey'}>
+                {rightModifiedElements.map((element, index) => (
+                <Stack key={index} bgcolor={'lightgrey'} borderRadius={1} margin={1.2}>
+                    {element}
+                    <Button
                         variant="contained"
-                        color="info"
-                        sx={{ marginRight: '10px' }}
-                        startIcon={<MonetizationOnIcon />}
-                        onClick={handleCoinButtonClick}
-                        ></Button>
-                        {/* ----------LOOT---------- */}
-                        <div>
-                        <TextField
-                            id="standard-number"
-                            label="Loot Cards"
-                            value={lootAmount}
-                            type="number"
-                            onChange={(e) => setLootAmount(e.target.value)}
-                            size="small"
-                            InputLabelProps={{
-                            shrink: true,
-                            }}
-                            variant="standard"
-                        />
-                        </div>
-                        <Button
-                        variant="contained"
-                        color="info"
-                        sx={{ marginRight: '10px' }}
-                        startIcon={<StyleIcon />}
-                        onClick={handleLootButtonClick}
-                        ></Button>
-                        {/* ----------TREASURE---------- */}
-                        <div>
-                        <TextField label="Treasure Name" value={treasureName} onChange={(e) => setTreasureName(e.target.value)} size="small" />
-                        </div>
-                        <Button variant="contained" color="info" startIcon={<DiamondIcon />} onClick={handleTreasureButtonClick}></Button>
-                    </Stack>
-                    </Toolbar>
-                </AppBar>
-                </Grid>
-    
-                <Grid item xs={12} sm={6}>
-                <Typography bgcolor={'blue'}>Ply UI</Typography>
-                </Grid>
+                        color="error"
+                        startIcon={<DeleteIcon />}
+                        onClick={() => handleRightDeleteButtonClick(element)}
+                        sx={{ m: '10px' }}
+                    >
+                        Delete
+                    </Button>
+                </Stack>
+                ))}
             </Grid>
             </Grid>
-        </StyledBox>
-        </SwipeableDrawer>
-    </>
-    );
+        </Grid>
+        <Grid container xs={12} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        {/* _______________________________Left UI________________________________________________ */}
+        <Grid item xs={12} sm={6}>
+        <AppBar position="static" color="primary">
+            <Toolbar>
+            <Stack spacing={0} direction="row" borderRadius={2}>
+                {/* ----------COIN---------- */}
+                <div>
+                <TextField
+                    id="standard-number"
+                    label="Coins"
+                    value={leftCoinAmount}
+                    type="number"
+                    onChange={(e) => setLeftCoinAmount(e.target.value)}
+                    size="small"
+                    InputLabelProps={{
+                    shrink: true,
+                    }}
+                    variant="standard"
+                />
+                </div>
+                <Button
+                variant="contained"
+                color="info"
+                sx={{ marginRight: '10px' }}
+                startIcon={<MonetizationOnIcon />}
+                onClick={handleLeftCoinButtonClick}
+                ></Button>
+                {/* ----------LOOT---------- */}
+                <div>
+                <TextField
+                    id="standard-number"
+                    label="Loot Cards"
+                    value={leftLootAmount}
+                    type="number"
+                    onChange={(e) => setLeftLootAmount(e.target.value)}
+                    size="small"
+                    InputLabelProps={{
+                    shrink: true,
+                    }}
+                    variant="standard"
+                />
+                </div>
+                <Button
+                variant="contained"
+                color="info"
+                sx={{ marginRight: '10px' }}
+                startIcon={<StyleIcon />}
+                onClick={handleLeftLootButtonClick}
+                ></Button>
+                {/* ----------TREASURE---------- */}
+                <div>
+                <TextField label="Treasure Name" value={leftTreasureName} onChange={(e) => setLeftTreasureName(e.target.value)} size="small" />
+                </div>
+                <Button variant="contained" color="info" startIcon={<DiamondIcon />} onClick={handleLeftTreasureButtonClick}></Button>
+            </Stack>
+            </Toolbar>
+        </AppBar>
+        </Grid>
+        {/* _______________________________Right UI________________________________________________ */}
+        <Grid item xs={12} sm={6}>
+        <AppBar position="static" color="primary">
+            <Toolbar>
+            <Stack spacing={0} direction="row" borderRadius={2}>
+                {/* ----------COIN---------- */}
+                <div>
+                <TextField
+                    id="standard-number"
+                    label="Coins"
+                    value={rightCoinAmount}
+                    type="number"
+                    onChange={(e) => setRightCoinAmount(e.target.value)}
+                    size="small"
+                    InputLabelProps={{
+                    shrink: true,
+                    }}
+                    variant="standard"
+                />
+                </div>
+                <Button
+                variant="contained"
+                color="info"
+                sx={{ marginRight: '10px' }}
+                startIcon={<MonetizationOnIcon />}
+                onClick={handleRightCoinButtonClick}
+                ></Button>
+                {/* ----------LOOT---------- */}
+                <div>
+                <TextField
+                    id="standard-number"
+                    label="Loot Cards"
+                    value={rightLootAmount}
+                    type="number"
+                    onChange={(e) => setRightLootAmount(e.target.value)}
+                    size="small"
+                    InputLabelProps={{
+                    shrink: true,
+                    }}
+                    variant="standard"
+                />
+                </div>
+                <Button
+                variant="contained"
+                color="info"
+                sx={{ marginRight: '10px' }}
+                startIcon={<StyleIcon />}
+                onClick={handleRightLootButtonClick}
+                ></Button>
+                {/* ----------TREASURE---------- */}
+                <div>
+                <TextField label="Treasure Name" value={rightTreasureName} onChange={(e) => setRightTreasureName(e.target.value)} size="small" />
+                </div>
+                <Button variant="contained" color="info" startIcon={<DiamondIcon />} onClick={handleRightTreasureButtonClick}></Button>
+            </Stack>
+            </Toolbar>
+        </AppBar>
+        </Grid>
+        </Grid>
+        </Grid>
+    </StyledBox>
+    </SwipeableDrawer>
+</>
+);
 }
