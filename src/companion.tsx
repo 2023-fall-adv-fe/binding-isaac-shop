@@ -16,9 +16,6 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 //Card Array
 import CardBase from './cards/cardbase';
 
-
-
-
 const Companion = () => {
     return (
         <>
