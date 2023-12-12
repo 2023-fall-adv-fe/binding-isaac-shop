@@ -12,7 +12,11 @@ type TradingCard = {
 interface CardBaseProps {
   className?: string;
 }
-
+/*
+bgcolor: 'lightyellow'   =    LEGENDARY
+bgcolor: 'lightblue'     =    RARE
+bgcolor: 'white'         =    COMMON
+*/
 //---------------------RANDOM-----------------------
 const RandomCardNumber = () => {
   let maxCards = tradingCards.length; // quantity in card array
@@ -24,7 +28,13 @@ const CardBase: React.FC<CardBaseProps> = ({ className }) => {
 
     const [cardNumber, setCdN] = useState<number>(RandomCardNumber());
 
-    const rarityColor = () => {return("red")};
+    const rarityColor = (n : string) => {
+        console.log(n);
+        if (n == "Common") {return("lightgrey")}
+        else if (n == "Rare") {return("lightblue")}
+        else if (n == "Legendary") {return("#FFFF99")}
+        else {return("black")}
+    };
 
   
     //________Remove/Randomize Card Again____Set Current Card Away____________
@@ -46,18 +56,23 @@ const CardBase: React.FC<CardBaseProps> = ({ className }) => {
       container
       className={className}
       sx={{
-        bgcolor: 'lightyellow',
+        bgcolor: 'white',
         minHeight: '100%',
         maxHeight: '100%',
         border: 'purple',
         display: 'flex',
         flexDirection: 'column',
-        borderRadius: "10px"
+        borderRadius: "10px",
+        borderLeftColor : rarityColor(tradingCards[cardNumber].rarity),
+        borderLeftStyle : "solid",
+        borderRightColor : rarityColor(tradingCards[cardNumber].rarity),
+        borderRightStyle : "solid"
+
       }}
     >
       <Grid
         sx={{
-          bgcolor: rarityColor,
+          bgcolor: rarityColor(tradingCards[cardNumber].rarity),
           borderTopLeftRadius : '10px',
           borderTopRightRadius : '10px'
         }}
