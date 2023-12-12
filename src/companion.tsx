@@ -16,6 +16,13 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 //Card Array
 import CardBase from './cards/cardbase';
 
+//Swipable Edge Drawer
+import DrawerButton from './offerdrawer';
+
+const EndGame = () => {
+    return(alert("End"));
+};
+
 const Companion = () => {
     return (
         <>
@@ -52,14 +59,7 @@ const Companion = () => {
 
                     {/* --------------------------------------LOWER BUTTONS--------------------------------- */}
                     <Grid xs={4} style={{ marginTop: "0.2rem", marginBottom: "0.2rem" }}>
-                        <Button
-                        sx={{bgcolor: 'gold', color: 'black'}}
-                        style={{ paddingInline: "5rem" }}
-                        variant='contained'
-                        size='large'
-                        startIcon={<Style/>}
-                        >Make Offer
-                        </Button>
+                        <DrawerButton />
                     </Grid>
 
                     <Grid xs={4} style={{ marginTop: "0.2rem", marginBottom: "0.2rem" }}>
@@ -68,6 +68,7 @@ const Companion = () => {
                         color='error'
                         variant='contained'
                         size='large'
+                        onClick={EndGame}
                         >End Game
                         </Button>
                     </Grid>

@@ -21,7 +21,11 @@ const RandomCardNumber = () => {
 
 //---------------------CARD-----------------------
 const CardBase: React.FC<CardBaseProps> = ({ className }) => {
+
     const [cardNumber, setCdN] = useState<number>(RandomCardNumber());
+
+    const rarityColor = () => {return("red")};
+
   
     //________Remove/Randomize Card Again____Set Current Card Away____________
     const removeClick = () => {
@@ -34,18 +38,6 @@ const CardBase: React.FC<CardBaseProps> = ({ className }) => {
 
         // Remove the replaced card from the tradingCards array
         tradingCards.splice(cardNumber, 1);
-
-
-
-
-        console.log("_______________________________");
-        console.log(tradingCards);
-        console.log("_______________________________");
-        console.log(replacedCards);
-        console.log("_______________________________");
-        console.log("new card arr_num: " + newCardNumber);
-        console.log("previous card arr_num: " + cardNumber);
-        console.log("Replaced Card:", replacedCard);
     };
 
 
@@ -60,11 +52,14 @@ const CardBase: React.FC<CardBaseProps> = ({ className }) => {
         border: 'purple',
         display: 'flex',
         flexDirection: 'column',
+        borderRadius: "10px"
       }}
     >
       <Grid
         sx={{
-          bgcolor: 'white',
+          bgcolor: rarityColor,
+          borderTopLeftRadius : '10px',
+          borderTopRightRadius : '10px'
         }}
       >
         <Typography variant="h5" sx={{}}>
