@@ -47,6 +47,7 @@ const Home = () => {
                         variant='contained'
                         size='large'
                         startIcon={<SettingsIcon/>}
+                        onClick={() => {navigate('/config')}}
                         >Configuration
                         </Button>
                     </Grid>

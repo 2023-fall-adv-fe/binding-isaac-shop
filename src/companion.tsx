@@ -20,7 +20,6 @@ const EndGame = () => {
     const navigate = useNavigate();
   
     const performEndGame = () => {
-      alert("End");
       navigate('/');
     };
   
