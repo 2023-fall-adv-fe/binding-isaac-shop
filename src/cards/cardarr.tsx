@@ -49,6 +49,7 @@ export const tradingCards: TradingCard[] = [
   { name: "Brimstone", rarity: "Rare", description: "+1 Dmg. Each time you deal combat damage to a monster, deal 1 damage to another player." },
   { name: "Mom's Purse", rarity: "Common", description: "Loot +1 during your loot step." },
   { name: "The Chest", rarity: "Legendary", description: "If this would be destroyed it becomes a soul instead." },
+  //Fake Cards
   { name: "The Ladder", rarity: "Common", description: "You may attack any monster in the dungeon without a line of sight." },
   { name: "Guppy's Collar", rarity: "Rare", description: "When you die, roll; (1: Revive with 1 health. 2-6: Stay dead.)" },
   { name: "Guppy's Hairball", rarity: "Common", description: "Add +1 to your attack roll." },

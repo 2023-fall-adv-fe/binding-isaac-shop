@@ -12,11 +12,7 @@ type TradingCard = {
 interface CardBaseProps {
   className?: string;
 }
-/*
-bgcolor: 'lightyellow'   =    LEGENDARY
-bgcolor: 'lightblue'     =    RARE
-bgcolor: 'white'         =    COMMON
-*/
+
 //---------------------RANDOM-----------------------
 const RandomCardNumber = () => {
   let maxCards = tradingCards.length; // quantity in card array
@@ -29,7 +25,6 @@ const CardBase: React.FC<CardBaseProps> = ({ className }) => {
     const [cardNumber, setCdN] = useState<number>(RandomCardNumber());
 
     const rarityColor = (n : string) => {
-        console.log(n);
         if (n == "Common") {return("lightgrey")}
         else if (n == "Rare") {return("lightblue")}
         else if (n == "Legendary") {return("#FFFF99")}
@@ -77,7 +72,7 @@ const CardBase: React.FC<CardBaseProps> = ({ className }) => {
           borderTopRightRadius : '10px'
         }}
       >
-        <Typography variant="h5" sx={{}}>
+        <Typography variant="h5">
           {tradingCards[cardNumber].name}
         </Typography>
         <Typography variant="body1" sx={{ color: 'grey' }}>
