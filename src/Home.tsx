@@ -7,8 +7,10 @@ import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import Typography from '@mui/material/Typography';
 import { Container } from '@mui/material';
 import { Style } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+    const navigate = useNavigate();
     return (
         <>
             <Grid xs={12}>
@@ -33,6 +35,7 @@ const Home = () => {
                         variant='contained'
                         size='large'
                         startIcon={<Style/>}
+                        onClick={() => {navigate('/companion')}}
                         >Play
                         </Button>
                     </Grid>

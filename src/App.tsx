@@ -7,10 +7,11 @@ import {
   createHashRouter,
   RouterProvider,
 } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 //Layout
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
-import { Container } from '@mui/material';
+import { Button, Container } from '@mui/material';
 
 //Pages
 import Header from './header';
@@ -19,7 +20,6 @@ import Config from './config';
 import Offer from './offer';
 import Footer from './footer';
 import Home from './home';
-
 
 const router = createHashRouter([
   {

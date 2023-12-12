@@ -20,6 +20,88 @@ import DiamondIcon from '@mui/icons-material/Diamond';
 import { tradingCards } from './cards/cardarr';
 
 // Data Needed---------------
+
+// interface SKStatsProps {
+//     onUpdatePoints: (value: number) => void;
+//   }
+  
+//   const AddButton: React.FC<SKStatsProps> = ({ onUpdatePoints }) => {
+//     const [inputValue, setInputValue] = useState<string>('');
+  
+//     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//       setInputValue(e.target.value);
+//     };
+  
+//     const handleAdd = () => {
+//       const valueToAdd = isNaN(parseFloat(inputValue)) ? 0 : parseFloat(inputValue);
+//       onUpdatePoints(valueToAdd);
+//       setInputValue('');
+//     };
+  
+//     return (
+//       <div>
+//         <input
+//           type="number"
+//           value={inputValue}
+//           onChange={handleInputChange}
+//         />
+//         <Button variant="contained" color="primary" onClick={handleAdd}>
+//           Add Points
+//         </Button>
+//       </div>
+//     );
+//   };
+  
+//   const SubtractButton: React.FC<SKStatsProps> = ({ onUpdatePoints }) => {
+//     const [inputValue, setInputValue] = useState<string>('');
+  
+//     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//       setInputValue(e.target.value);
+//     };
+  
+//     const handleSubtract = () => {
+//       const valueToSubtract = isNaN(parseFloat(inputValue)) ? 0 : parseFloat(inputValue);
+//       onUpdatePoints(-valueToSubtract); // Subtracting, so pass a negative value
+//       setInputValue('');
+//     };
+  
+//     return (
+//       <div>
+//         <input
+//           type="number"
+//           value={inputValue}
+//           onChange={handleInputChange}
+//         />
+//         <Button variant="contained" color="secondary" onClick={handleSubtract}>
+//           Subtract Points
+//         </Button>
+//       </div>
+//     );
+//   };
+  
+//   const ButtonLogic: React.FC<SKStatsProps> = ({ onUpdatePoints }) => {
+//     return (
+//       <div>
+//         <h2>Button Logic</h2>
+//         <AddButton onUpdatePoints={onUpdatePoints} />
+//         <SubtractButton onUpdatePoints={onUpdatePoints} />
+//       </div>
+//     );
+//   };
+
+
+
+
+// //Coin & Loot Stat Modifiers
+// //Remove;
+
+
+// //Add;
+
+
+
+
+
 const drawerBleeding = 56;
 
 const StyledBox = styled(Box)(({ theme }) => ({
@@ -43,6 +125,9 @@ const [rightCoinAmount, setRightCoinAmount] = useState('');
 const [rightLootAmount, setRightLootAmount] = useState('');
 const [rightTreasureName, setRightTreasureName] = useState('');
 const [rightModifiedElements, setRightModifiedElements] = useState<React.ReactNode[]>([]);
+//SK Coin Values--------------
+const [tCoins, totalCoins] = useState('');
+// setLeftModifiedElements([...totalCoins, newCoinNumber]);
 
 // LEFT FUNCTIONS!
 const handleLeftDeleteButtonClick = (element: React.ReactNode) => {
@@ -72,6 +157,7 @@ const handleLeftCoinButtonClick = () => {
     );
 
     setLeftModifiedElements([...leftModifiedElements, modifiedElement]);
+    // removeCoinsFromSK(Number(leftCoinAmount));
     setLeftCoinAmount('');
 };
 const handleLeftLootButtonClick = () => {
@@ -238,6 +324,54 @@ const handleRightTreasureButtonClick = () => {
     setRightTreasureName(''); // Clear input
 };
 
+
+const submitOffer = () => {
+    console.log('Closed');
+
+    const calculateTotal = (modifiedElements: React.ReactNode[]) => {
+        let totalCoins = 0;
+        let totalLoot = 0;
+    
+        modifiedElements.forEach((element, index) => {
+            if (React.isValidElement(element)) {
+                const elementText = extractTextFromElement(element);
+                if (elementText.includes('Coin:')) {
+                    const coinValue = Number(elementText.split(' ')[1]);
+                    totalCoins += coinValue;
+                }
+                if (elementText.includes('Loot:')) {
+                    const lootValue = Number(elementText.split(' ')[1]);
+                    totalLoot += lootValue;
+                }
+            }
+        });
+        return { totalCoins, totalLoot };
+    };
+    
+    const extractTextFromElement = (element: React.ReactNode): string => {
+        if (typeof element === 'string') {
+            return element;
+        } else if (React.isValidElement(element)) {
+            const childTexts: string[] = React.Children.map(element.props.children, (child) => {
+                return extractTextFromElement(child);
+            });
+            return childTexts.join('');
+        }
+        return '';
+    };
+    const leftTotal = calculateTotal(leftModifiedElements);
+    const rightTotal = calculateTotal(rightModifiedElements);
+
+    console.log('Left Total Coins:', leftTotal.totalCoins);
+    console.log('Left Total Loot:', leftTotal.totalLoot);
+
+    console.log('Right Total Coins:', rightTotal.totalCoins);
+    console.log('Right Total Loot:', rightTotal.totalLoot);
+
+    //Subtract / Add from current amount
+
+
+};
 
 
 
@@ -428,6 +562,7 @@ return (
         </Grid>
         </Grid>
     </StyledBox>
+    <Button onClick={submitOffer} variant="contained" color='warning'>Submit Offer</Button>
     </SwipeableDrawer>
 </>
 );

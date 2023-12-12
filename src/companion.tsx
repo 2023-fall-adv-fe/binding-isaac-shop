@@ -5,27 +5,43 @@ import CardContent from '@mui/material/CardContent';
 import SettingsIcon from '@mui/icons-material/Settings';
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import Typography from '@mui/material/Typography';
-import { BottomNavigation, CardActions, CardHeader, CardMedia, Container, createTheme } from '@mui/material';
+import { BottomNavigation, CardActions, CardHeader, CardMedia, Container, Divider, Stack, createTheme } from '@mui/material';
 import { Style } from '@mui/icons-material';
-
-//Images of Card Art
-// import DadsLostCoin from './img/cardArt/DadsLostCoin';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-
+import { useNavigate } from 'react-router-dom';
 //Card Array
 import CardBase from './cards/cardbase';
+import { Scoreboard } from './shopkeeperscore';
 
 //Swipable Edge Drawer
 import DrawerButton from './offerdrawer';
+import { useState } from 'react';
 
 const EndGame = () => {
-    return(alert("End"));
-};
+    const navigate = useNavigate();
+  
+    const performEndGame = () => {
+      alert("End");
+      navigate('/');
+    };
+  
+    return (
+      <Button
+        style={{ paddingInline: "6.40rem" }}
+        color='error'
+        variant='contained'
+        size='large'
+        onClick={performEndGame}
+      >
+        End Game
+      </Button>
+    );
+  };
+
 
 const Companion = () => {
+
     return (
-        <>
+    <>
             <Grid xs={12}>
                 <Grid container columns={{xs: 12}}>
                 <Grid xs={12}>
@@ -63,16 +79,10 @@ const Companion = () => {
                     </Grid>
 
                     <Grid xs={4} style={{ marginTop: "0.2rem", marginBottom: "0.2rem" }}>
-                        <Button
-                        style={{ paddingInline: "6.40rem" }}
-                        color='error'
-                        variant='contained'
-                        size='large'
-                        onClick={EndGame}
-                        >End Game
-                        </Button>
+                        <EndGame />
                     </Grid>
                     </Grid>
+                    <Scoreboard currentCoin={0} currentLoot={0} />
                 </Grid>
                 </Grid>
             </Grid>
